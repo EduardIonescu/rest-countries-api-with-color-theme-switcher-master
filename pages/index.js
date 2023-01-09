@@ -7,19 +7,29 @@ import cloneDeep from "lodash.clonedeep";
 const countriesURL = "https://restcountries.com/v3.1/all";
 const fetcher = (url) => fetch(url).then((r) => r.json());
 
-export default function Home() {
-	const { data, error } = useSWR(countriesURL, fetcher);
+export async function getStaticProps() {
+	const res = await fetch(countriesURL);
+	const countriesData = await res.json();
+	return {
+		props: {
+			countriesData,
+		},
+	};
+}
+
+export default function Home({ countriesData }) {
+	//const { data, error } = useSWR(countriesURL, fetcher);
 	const [filterByRegion, setFilterByRegion] = useState(false);
 	const [filterBySearch, setFilterBySearch] = useState("");
-	let filteredData = cloneDeep(data);
-	if (filterByRegion && data) {
+	let filteredData = cloneDeep(countriesData);
+	if (filterByRegion && countriesData) {
 		filteredData = filteredData.filter((country) => {
 			if (country.region == filterByRegion) {
 				return country;
 			}
 		});
 	}
-	if (filterBySearch && data) {
+	if (filterBySearch && countriesData) {
 		filteredData = filteredData.filter((country) =>
 			country.name.common
 				.toLowerCase()
@@ -29,7 +39,6 @@ export default function Home() {
 
 	return (
 		<section>
-			{console.log(data)}
 			<form className="flex justify-between w-full">
 				<input
 					value={filterBySearch}
@@ -47,10 +56,13 @@ export default function Home() {
 					setFilterByRegion={setFilterByRegion}
 				/>
 			</form>
-			<section className="my-24 flex flex-wrap gap-x-44 gap-y-20">
-				{data
+			<section
+				className="my-24 flex flex-wrap flex-col items-center md:flex-row xl:gap-x-[calc((100%-(256px*4))/3)]
+			lg:gap-x-[calc((100%-(256px*3))/2)] md:gap-x-[calc(100%-(256px*2))] gap-y-20"
+			>
+				{countriesData
 					? filteredData.map((country) => (
-							<CountryCard country={country} />
+							<CountryCard key={country.cca2} country={country} />
 					  ))
 					: "Loading..."}
 			</section>
