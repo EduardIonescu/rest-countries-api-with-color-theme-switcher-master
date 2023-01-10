@@ -35,13 +35,14 @@ export default function FilterRegion({ filterByRegion, setFilterByRegion }) {
 		};
 	}, [optionsRef]);
 	return (
-		<fieldset className="relative w-48 font-semibold text-[14px]">
+		<fieldset className="relative w-48 font-semibold text-[14px] dark:text-white">
 			<button
 				onClick={toggleSelect}
 				ref={optionsTitleRef}
 				type="button"
-				className="w-full flex items-center justify-between rounded-md
-    bg-white pr-5 pl-6 h-16 shadow text-[14px] font-semibold"
+				className="w-full flex items-center justify-between rounded-md transition-all
+				duration-300
+    bg-white dark:bg-darkBlue pr-5 pl-6 h-16 shadow text-[14px] font-semibold"
 			>
 				{filterByRegion
 					? filterByRegion != "Americas"
@@ -61,7 +62,7 @@ export default function FilterRegion({ filterByRegion, setFilterByRegion }) {
 				<ul
 					ref={optionsRef}
 					className={
-						"z-2 absolute mt-2 w-full rounded-sm bg-white py-3 shadow"
+						"z-2 absolute mt-2 w-full rounded-sm bg-white dark:bg-darkBlue py-3 shadow"
 					}
 				>
 					{regions.map((region) => (

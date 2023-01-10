@@ -14,7 +14,7 @@ export default function Navbar() {
 			<nav
 				className="text-veryDarkBlueLightMode dark:text-white 
 			font-nunito flex justify-between
-      px-20 py-8 bg-white dark:bg-darkBlue transition-all duration-500"
+      px-20 py-8 bg-white dark:bg-darkBlue transition-all duration-300"
 			>
 				<h1 className="font-extrabold text-2xl">Where in the world?</h1>
 				{mounted ? (
@@ -28,6 +28,8 @@ export default function Navbar() {
 							src={`/icons/${
 								theme == "light" ? "moon" : "sun"
 							}-icon.svg`}
+							alt=""
+							aria-hidden="true"
 							height={16}
 							width={12}
 							className={"w-4 h-4"}
@@ -38,6 +40,8 @@ export default function Navbar() {
 					<button className="font-semibold flex items-center gap-2">
 						<Image
 							src="/icons/moon-icon.svg"
+							alt=""
+							aria-hidden="true"
 							height={16}
 							width={12}
 							className={"w-4 h-4"}

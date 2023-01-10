@@ -3,7 +3,8 @@ export default function CountryCard({ country }) {
 	return (
 		<Link
 			href={`/country/${country.name.common.toLowerCase()}`}
-			className="h-[345px] rounded-md overflow-hidden bg-white shadow"
+			className="h-[345px] max-w-64 rounded-md overflow-hidden bg-white 
+			dark:bg-darkBlue transition-all duration-300 shadow"
 		>
 			<img
 				src={country.flags.png}
@@ -14,10 +15,10 @@ export default function CountryCard({ country }) {
 			/>
 
 			<div
-				className="px-[26px] text-veryDarkBlueLightMode text-[14px] font-light
-      leading-6"
+				className="px-[26px] text-veryDarkBlueLightMode dark:text-white
+				text-[14px] font-light leading-6"
 			>
-				<h2 className="pt-7 pb-5 font-extrabold text-[19px]">
+				<h2 className="pt-7 pb-5 max-w-[204px] font-extrabold text-[19px]">
 					{country.name.common}
 				</h2>
 				<p>
@@ -31,7 +32,7 @@ export default function CountryCard({ country }) {
 				</p>
 				<p>
 					<span className="font-semibold">Capital:</span>{" "}
-					{country.capital}
+					{country.capital && country.capital[0]}
 				</p>
 			</div>
 		</Link>

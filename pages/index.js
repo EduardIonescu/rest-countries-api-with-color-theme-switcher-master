@@ -72,7 +72,10 @@ export default function Home() {
 	}
 
 	return (
-		<main className="w-full  py-10 px-20 bg-veryLightGray">
+		<main
+			className="w-full  py-10 px-20 bg-veryLightGray transition duration-300
+		 dark:bg-veryDarkBlue"
+		>
 			<section>
 				<form className="flex justify-between w-full">
 					<input
@@ -81,9 +84,11 @@ export default function Home() {
 						type="text"
 						placeholder="Search for a country..."
 						className="h-16 w-[30rem] rounded-xl border-[2px] text-darkGray
-        text-[14px] font-semibold placeholder:text-darkGray
-        bg-[url('../public/icons/search-icon.svg')] bg-no-repeat bg-[length:16px_16px]
-        bg-[center_left_2rem] pl-20"
+				dark:text-white focus:outline-none  border-darkBlue transition-all
+				duration-300
+        text-[14px] font-semibold placeholder:text-darkGray dark:bg-darkBlue
+				dark:placeholder:text-white bg-[url('../public/icons/search-icon.svg')]
+				bg-no-repeat bg-[length:16px_16px] bg-[center_left_2rem] pl-20"
 					/>
 
 					<FilterRegion
@@ -92,8 +97,9 @@ export default function Home() {
 					/>
 				</form>
 				<section
-					className="my-24 flex flex-wrap flex-col items-center md:flex-row xl:gap-x-[calc((100%-(256px*4))/3)]
-			lg:gap-x-[calc((100%-(256px*3))/2)] md:gap-x-[calc(100%-(256px*2))] gap-y-20"
+					className="my-24 flex flex-wrap flex-col items-center md:flex-row 
+			xl:gap-x-[calc((100%-(256px*4))/3)] lg:gap-x-[calc((100%-(256px*3))/2)] 
+			md:gap-x-[calc(100%-(256px*2))] gap-y-20"
 				>
 					{countriesData.length >= 1
 						? filteredData.map((country) => (

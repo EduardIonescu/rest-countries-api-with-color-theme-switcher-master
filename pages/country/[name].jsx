@@ -77,11 +77,15 @@ export default function Country({ countryData, borderNames }) {
 	);
 	console.log(countryData);
 	return (
-		<main className="w-full py-10 px-20 ">
+		<main
+			className="w-full py-10 px-20 bg-white dark:bg-veryDarkBlue
+		transition-all duration-300"
+		>
 			<section className="mt-10">
 				<Link
 					href="/"
-					className="group flex gap-4 items-center bg-white w-40 h-12 justify-center
+					className="group flex gap-4 items-center bg-white dark:bg-darkBlue
+					 w-40 h-12 justify-center
         rounded-md shadow-md font-semibold transition-all duration-300 ease-linear
 				hover:shadow-xl"
 				>
@@ -100,9 +104,13 @@ export default function Country({ countryData, borderNames }) {
 				<section className="mt-20 flex items-center gap-32">
 					<img
 						src={countryData.flags.png}
+						alt={`${countryData.name.common}'s Flag`}
 						className="w-[600px] max-h-[420px] object-contain"
 					/>
-					<article>
+					<article
+						className="text-veryDarkBlueLightMode
+					dark:text-white transition-all duration-300"
+					>
 						<h2 className="font-extrabold text-[32px] mb-6">
 							{countryData.name.common}
 						</h2>
