@@ -13,9 +13,8 @@ export default function Layout({ children }) {
 				/>
 			</Head>
 			<Navbar />
-			<main className="w-full h-full py-10 px-20 bg-veryLightGray">
-				{children}
-			</main>
+
+			{children}
 		</>
 	);
 }

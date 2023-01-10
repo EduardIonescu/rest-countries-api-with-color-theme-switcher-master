@@ -72,34 +72,39 @@ export default function Home() {
 	}
 
 	return (
-		<section>
-			<form className="flex justify-between w-full">
-				<input
-					value={filterBySearch}
-					onInput={(e) => setFilterBySearch(e.target.value)}
-					type="text"
-					placeholder="Search for a country..."
-					className="h-16 w-[30rem] rounded-xl border-[2px] text-darkGray
+		<main className="w-full  py-10 px-20 bg-veryLightGray">
+			<section>
+				<form className="flex justify-between w-full">
+					<input
+						value={filterBySearch}
+						onInput={(e) => setFilterBySearch(e.target.value)}
+						type="text"
+						placeholder="Search for a country..."
+						className="h-16 w-[30rem] rounded-xl border-[2px] text-darkGray
         text-[14px] font-semibold placeholder:text-darkGray
         bg-[url('../public/icons/search-icon.svg')] bg-no-repeat bg-[length:16px_16px]
         bg-[center_left_2rem] pl-20"
-				/>
+					/>
 
-				<FilterRegion
-					filterByRegion={filterByRegion}
-					setFilterByRegion={setFilterByRegion}
-				/>
-			</form>
-			<section
-				className="my-24 flex flex-wrap flex-col items-center md:flex-row xl:gap-x-[calc((100%-(256px*4))/3)]
+					<FilterRegion
+						filterByRegion={filterByRegion}
+						setFilterByRegion={setFilterByRegion}
+					/>
+				</form>
+				<section
+					className="my-24 flex flex-wrap flex-col items-center md:flex-row xl:gap-x-[calc((100%-(256px*4))/3)]
 			lg:gap-x-[calc((100%-(256px*3))/2)] md:gap-x-[calc(100%-(256px*2))] gap-y-20"
-			>
-				{countriesData.length >= 1
-					? filteredData.map((country) => (
-							<CountryCard key={country.cca2} country={country} />
-					  ))
-					: "Loading..."}
+				>
+					{countriesData.length >= 1
+						? filteredData.map((country) => (
+								<CountryCard
+									key={country.cca2}
+									country={country}
+								/>
+						  ))
+						: "Loading..."}
+				</section>
 			</section>
-		</section>
+		</main>
 	);
 }

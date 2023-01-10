@@ -9,7 +9,8 @@ import BorderLink from "../../components/borderLink";
 
 export async function getStaticProps({ params }) {
 	const countryData = await getCountryData(params.name);
-	const countryBorders = await countryData[0].borders;
+
+	const countryBorders = await countryData.borders;
 	let borderNames;
 	if (countryBorders) {
 		borderNames = await getAllCountryBorders(countryBorders);
@@ -42,7 +43,7 @@ export async function getStaticProps({ params }) {
 
 		async function setBorderName(border) {
 			const data = await fetchBorderData(border);
-			const name = data[0].name.common.toLowerCase();
+			const name = data.name.common.toLowerCase();
 
 			if (!borderNames.includes(name)) borderNames.push(name);
 		}
@@ -68,97 +69,108 @@ export async function getStaticPaths() {
 }
 
 export default function Country({ countryData, borderNames }) {
-	const borders = countryData[0].borders && countryData[0].borders;
-	const primaryLanguage = Object.keys(countryData[0].languages)[0];
-	const nativeName = countryData[0].name.nativeName[primaryLanguage].common;
-	const currencies = Object.values(countryData[0].currencies).map(
+	const borders = countryData.borders && countryData.borders;
+	const primaryLanguage = Object.keys(countryData.languages)[0];
+	const nativeName = countryData.name.nativeName[primaryLanguage].common;
+	const currencies = Object.values(countryData.currencies).map(
 		(currency) => currency.name
 	);
 	console.log(countryData);
 	return (
-		<section className="mt-10">
-			<Link
-				href="/"
-				className="flex gap-4 items-center bg-white w-40 h-12 justify-center
-        rounded-md shadow-md font-semibold"
-			>
-				<Image
-					className="rotate-180"
-					src="/icons/arrow-icon.svg"
-					alt=""
-					aria-hidden="true"
-					width={18}
-					height={10}
-				/>{" "}
-				Back
-			</Link>
-			{console.log("work pls", borderNames)}
-			<section className="mt-20 flex items-center gap-32">
-				<img
-					src={countryData[0].flags.png}
-					className="w-[600px] max-h-[420px] object-contain"
-				/>
-				<article>
-					<h2 className="font-extrabold text-[32px] mb-6">
-						{countryData[0].name.common}
-					</h2>
-					<div className="flex gap-36">
-						<div>
-							<p className="font-semibold leading-9">
-								<span className="font-extrabold">
-									Native Name
-								</span>
-								: {nativeName}
-							</p>
-							<p className="font-semibold leading-9">
-								<span className="font-extrabold">
-									Population
-								</span>
-								:{" "}
-								{countryData[0].population.toLocaleString("en")}
-							</p>
-							<p className="font-semibold leading-9">
-								<span className="font-extrabold">Region</span>:{" "}
-								{countryData[0].region}
-							</p>
-							<p className="font-semibold leading-9">
-								<span className="font-extrabold">
-									Sub Region
-								</span>
-								: {countryData[0].subregion}
-							</p>
-							<p className="font-semibold leading-9">
-								<span className="font-extrabold">Capital</span>:{" "}
-								{countryData[0].capital[0]}
-							</p>
+		<main className="w-full py-10 px-20 ">
+			<section className="mt-10">
+				<Link
+					href="/"
+					className="group flex gap-4 items-center bg-white w-40 h-12 justify-center
+        rounded-md shadow-md font-semibold transition-all duration-300 ease-linear
+				hover:shadow-xl"
+				>
+					<Image
+						className="rotate-180 transition-all duration-300 ease-out
+					group-hover:-translate-x-2"
+						src="/icons/arrow-icon.svg"
+						alt=""
+						aria-hidden="true"
+						width={18}
+						height={10}
+					/>{" "}
+					Back
+				</Link>
+				{console.log("work pls", borderNames)}
+				<section className="mt-20 flex items-center gap-32">
+					<img
+						src={countryData.flags.png}
+						className="w-[600px] max-h-[420px] object-contain"
+					/>
+					<article>
+						<h2 className="font-extrabold text-[32px] mb-6">
+							{countryData.name.common}
+						</h2>
+						<div className="flex gap-36">
+							<div>
+								<p className="font-semibold leading-9">
+									<span className="font-extrabold">
+										Native Name
+									</span>
+									: {nativeName}
+								</p>
+								<p className="font-semibold leading-9">
+									<span className="font-extrabold">
+										Population
+									</span>
+									:{" "}
+									{countryData.population.toLocaleString(
+										"en"
+									)}
+								</p>
+								<p className="font-semibold leading-9">
+									<span className="font-extrabold">
+										Region
+									</span>
+									: {countryData.region}
+								</p>
+								<p className="font-semibold leading-9">
+									<span className="font-extrabold">
+										Sub Region
+									</span>
+									: {countryData.subregion}
+								</p>
+								<p className="font-semibold leading-9">
+									<span className="font-extrabold">
+										Capital
+									</span>
+									: {countryData.capital[0]}
+								</p>
+							</div>
+							<div>
+								<p className="font-semibold leading-9">
+									<span className="font-extrabold">
+										Top Level Domain
+									</span>
+									: {countryData.tld.join(", ")}
+								</p>
+								<p className="font-semibold leading-9">
+									<span className="font-extrabold">
+										Currencies
+									</span>
+									: {currencies.join(", ")}
+								</p>
+								<p className="font-semibold leading-9">
+									<span className="font-extrabold">
+										Languages
+									</span>
+									:{" "}
+									{Object.values(countryData.languages).join(
+										", "
+									)}
+								</p>
+							</div>
 						</div>
-						<div>
-							<p className="font-semibold leading-9">
-								<span className="font-extrabold">
-									Top Level Domain
-								</span>
-								: {countryData[0].tld.join(", ")}
-							</p>
-							<p className="font-semibold leading-9">
-								<span className="font-extrabold">
-									Currencies
-								</span>
-								: {currencies.join(", ")}
-							</p>
-							<p className="font-semibold leading-9">
-								<span className="font-extrabold">
-									Languages
-								</span>
-								:{" "}
-								{Object.values(countryData[0].languages).join(
-									", "
-								)}
-							</p>
-						</div>
-					</div>
-					<div className="flex gap-4 font-semibold leading-9 mt-16">
-						<p className="font-extrabold">Border Countries:</p>{" "}
-						<div className="flex gap-2 flex-wrap">
+						<div
+							className="flex gap-2 flex-wrap font-semibold leading-9 mt-16 
+						w-[800px]"
+						>
+							<p className=" font-extrabold">Border Countries:</p>{" "}
 							{borderNames &&
 								borderNames.map((borderName) => (
 									<BorderLink
@@ -167,9 +179,9 @@ export default function Country({ countryData, borderNames }) {
 									/>
 								))}
 						</div>
-					</div>
-				</article>
+					</article>
+				</section>
 			</section>
-		</section>
+		</main>
 	);
 }
