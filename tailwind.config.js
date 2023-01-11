@@ -16,6 +16,7 @@ module.exports = {
 				veryDarkBlueLightMode: "hsl(200, 15%, 8%)",
 				darkGray: "hsl(0, 0%, 52%)",
 				veryLightGray: "hsl(0, 0%, 98%)",
+				blueHover: "rgb(100,100,250)",
 			},
 		},
 	},

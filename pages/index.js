@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FilterRegion from "../components/filter/filterRegion";
 import cloneDeep from "lodash.clonedeep";
 import SearchBar from "../components/filter/searchBar";
 import Countries from "../components/countries/countries";
+import NoResults from "../components/states/noResults";
+import Loading from "../components/states/loading";
+
+const countriesURL = "https://restcountries.com/v3.1/all";
 
 export default function Home() {
 	const [countriesData, setCountriesData] = useState([]);
 	const [filterByRegion, setFilterByRegion] = useState(false);
 	const [filterBySearch, setFilterBySearch] = useState("");
-	const [noResultsFound, setNoResultsFound] = useState(false);
-	console.log(countriesData);
+
 	let filteredData = cloneDeep(countriesData);
 	if (filterByRegion && countriesData) {
 		filteredData = filteredData.filter((country) => {
@@ -17,16 +20,6 @@ export default function Home() {
 				return country;
 			}
 		});
-		/**
-		if (filteredData.length == 0) {
-			if (noResultsFound == false) {
-				setNoResultsFound(true);
-			}
-		} else {
-			if (noResultsFound == true) {
-				setNoResultsFound(false);
-			}
-		} */
 	}
 	if (filterBySearch && countriesData) {
 		filteredData = filteredData.filter((country) =>
@@ -36,13 +29,43 @@ export default function Home() {
 		);
 	}
 
+	async function fetchData(url) {
+		try {
+			const res = await fetch(url);
+			const data = await res.json();
+			return data;
+		} catch (err) {
+			console.log(err);
+		}
+	}
+	useEffect(() => {
+		let ignore = false;
+
+		// Delete localStorage before deployment
+		let data = JSON.parse(localStorage.getItem("data"));
+		async function startFetching() {
+			if (!data) {
+				data = await fetchData(countriesURL);
+				localStorage.setItem("data", JSON.stringify(data));
+			}
+			if (!ignore) {
+				setCountriesData(data);
+			}
+		}
+		startFetching();
+
+		return () => {
+			ignore = true;
+		};
+	}, []);
+
 	return (
 		<main
-			className="w-full  py-10 px-20 bg-veryLightGray transition duration-300
+			className="w-full py-6 md:py-10 px-4 md:px-20 bg-veryLightGray transition duration-300
 		 dark:bg-veryDarkBlue min-h-[calc(100vh-96px)]"
 		>
 			<section>
-				<form className="flex justify-between w-full">
+				<form className="flex flex-wrap gap-y-10 gap-x-4 justify-between w-full">
 					<SearchBar
 						filterBySearch={filterBySearch}
 						setFilterBySearch={setFilterBySearch}
@@ -53,14 +76,28 @@ export default function Home() {
 						setFilterByRegion={setFilterByRegion}
 					/>
 				</form>
-				{countriesData && !noResultsFound ? (
+				{/*countriesData && filteredData.length >= 1 ? (
 					<Countries
 						countriesData={countriesData}
 						filteredData={filteredData}
 						setCountriesData={setCountriesData}
 					/>
 				) : (
-					"no results found"
+					<NoResults />
+				)*/}
+
+				{countriesData.length >= 1 ? (
+					filteredData.length >= 1 ? (
+						<Countries
+							countriesData={countriesData}
+							filteredData={filteredData}
+							setCountriesData={setCountriesData}
+						/>
+					) : (
+						<NoResults />
+					)
+				) : (
+					<Loading />
 				)}
 			</section>
 		</main>

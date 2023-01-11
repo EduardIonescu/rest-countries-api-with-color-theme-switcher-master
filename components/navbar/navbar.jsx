@@ -12,11 +12,13 @@ export default function Navbar() {
 	return (
 		<header className="w-full shadow">
 			<nav
-				className="text-veryDarkBlueLightMode dark:text-white 
-			font-nunito flex justify-between
-      px-20 py-8 bg-white dark:bg-darkBlue transition-all duration-300"
+				className="text-veryDarkBlueLightMode dark:text-white flex 
+			justify-between px-4 md:px-20 py-7 md:py-8 bg-white
+		dark:bg-darkBlue transition-all duration-300 text-sm"
 			>
-				<h1 className="font-extrabold text-2xl">Where in the world?</h1>
+				<h1 className="font-extrabold text-base md:text-2xl">
+					Where in the world?
+				</h1>
 				{mounted ? (
 					<button
 						onClick={() =>
@@ -37,7 +39,10 @@ export default function Navbar() {
 						Dark Mode
 					</button>
 				) : (
-					<button className="font-semibold flex items-center gap-2">
+					<button
+						className="font-semibold flex items-center gap-2 
+					"
+					>
 						<Image
 							src="/icons/moon-icon.svg"
 							alt=""

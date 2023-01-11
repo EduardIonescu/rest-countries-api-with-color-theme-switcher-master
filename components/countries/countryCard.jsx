@@ -5,7 +5,7 @@ export default function CountryCard({ country }) {
 			href={`/country/${country.name.common.toLowerCase()}`}
 			className="h-[345px] max-w-64 rounded-md overflow-hidden bg-white 
 			dark:bg-darkBlue transition-all duration-300 shadow hover:-translate-y-2
-			hover:-rotate-2 hover:shadow-lg dark:hover:shadow-xl"
+			hover:rotate-2 hover:shadow-lg dark:hover:shadow-xl"
 		>
 			<img
 				src={country.flags.png}
@@ -17,7 +17,7 @@ export default function CountryCard({ country }) {
 
 			<div
 				className="px-[26px] text-veryDarkBlueLightMode dark:text-white
-				text-[14px] font-light leading-6"
+				text-[14px] font-light leading-6 transition duration-300"
 			>
 				<h2 className="pt-7 pb-5 max-w-[204px] font-extrabold text-[19px]">
 					{country.name.common}
