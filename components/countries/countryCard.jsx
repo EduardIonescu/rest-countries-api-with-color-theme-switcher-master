@@ -4,8 +4,8 @@ export default function CountryCard({ country }) {
 		<Link
 			href={`/country/${country.name.common.toLowerCase()}`}
 			className="h-[345px] max-w-64 rounded-md overflow-hidden bg-white 
-			dark:bg-darkBlue transition-all duration-300 shadow hover:-translate-y-2
-			hover:rotate-2 hover:shadow-lg dark:hover:shadow-xl"
+			dark:bg-darkBlue transition-all duration-300 shadow md:hover:-translate-y-2
+			md:hover:rotate-2 md:hover:shadow-lg md:dark:hover:shadow-xl"
 		>
 			<img
 				src={country.flags.png}
@@ -16,10 +16,10 @@ export default function CountryCard({ country }) {
 			/>
 
 			<div
-				className="px-[26px] text-veryDarkBlueLightMode dark:text-white
+				className="px-[26px] text-veryDarkBlueLightMode dark:text-veryLightGray
 				text-[14px] font-light leading-6 transition duration-300"
 			>
-				<h2 className="pt-7 pb-5 max-w-[204px] font-extrabold text-[19px]">
+				<h2 className="pt-6 md:pt-7 pb-5 max-w-[204px] font-extrabold text-[19px]">
 					{country.name.common}
 				</h2>
 				<p>
@@ -33,7 +33,7 @@ export default function CountryCard({ country }) {
 				</p>
 				<p>
 					<span className="font-semibold">Capital:</span>{" "}
-					{country.capital && country.capital[0]}
+					{country.capital ? country.capital[0] : "None"}
 				</p>
 			</div>
 		</Link>

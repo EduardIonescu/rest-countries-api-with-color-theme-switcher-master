@@ -9,8 +9,9 @@ const FilterButton = forwardRef(
 				ref={ref}
 				type="button"
 				className="w-[205px] md:w-full flex items-center justify-between 
-  rounded-md transition-all duration-300 hover:shadow-md hover:-translate-x-[1px] 
-  dark:hover:invert-[2%] dark:hover:shadow-lg bg-white dark:bg-darkBlue 
+  rounded-md transition-all duration-300 md:hover:shadow-md 
+  md:hover:-translate-x-[1px] md:dark:hover:invert-[2%] md:dark:hover:shadow-lg
+   bg-white dark:bg-darkBlue 
   pr-5 pl-6 h-[50px] md:h-16 shadow text-xs md:text-sm font-semibold"
 			>
 				{filterByRegion
