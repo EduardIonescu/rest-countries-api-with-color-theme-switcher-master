@@ -41,7 +41,8 @@ export default function FilterRegion({ filterByRegion, setFilterByRegion }) {
 				ref={optionsTitleRef}
 				type="button"
 				className="w-full flex items-center justify-between rounded-md transition-all
-				duration-300
+				duration-300 hover:shadow-md hover:-translate-x-[1px] dark:hover:invert-[2%]
+				dark:hover:shadow-lg
     bg-white dark:bg-darkBlue pr-5 pl-6 h-16 shadow text-[14px] font-semibold"
 			>
 				{filterByRegion
@@ -50,8 +51,8 @@ export default function FilterRegion({ filterByRegion, setFilterByRegion }) {
 						: "America"
 					: "Filter by Region"}
 				<Image
-					className={`dark:invert ${
-						selectIsOpen ? "" : "rotate-180"
+					className={`dark:invert transition duration-200 ease-in ${
+						selectIsOpen ? "rotate-0" : "rotate-180"
 					}`}
 					src={"/icons/angle-down-icon.svg"}
 					alt=""
@@ -64,9 +65,19 @@ export default function FilterRegion({ filterByRegion, setFilterByRegion }) {
 				<ul
 					ref={optionsRef}
 					className={
-						"z-2 absolute mt-2 w-full rounded-sm bg-white dark:bg-darkBlue py-3 shadow"
+						"z-10 absolute mt-2 w-full rounded-sm bg-white dark:bg-darkBlue py-3 shadow"
 					}
 				>
+					<li
+						key="default"
+						className="cursor-pointer select-none px-6 leading-7"
+						onClick={() => {
+							toggleSelect();
+							setFilterByRegion(false);
+						}}
+					>
+						All
+					</li>
 					{regions.map((region) => (
 						<li
 							key={region[0]}

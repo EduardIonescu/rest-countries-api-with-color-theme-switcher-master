@@ -8,7 +8,8 @@ export default function Home() {
 	const [countriesData, setCountriesData] = useState([]);
 	const [filterByRegion, setFilterByRegion] = useState(false);
 	const [filterBySearch, setFilterBySearch] = useState("");
-
+	const [noResultsFound, setNoResultsFound] = useState(false);
+	console.log(countriesData);
 	let filteredData = cloneDeep(countriesData);
 	if (filterByRegion && countriesData) {
 		filteredData = filteredData.filter((country) => {
@@ -16,6 +17,16 @@ export default function Home() {
 				return country;
 			}
 		});
+		/**
+		if (filteredData.length == 0) {
+			if (noResultsFound == false) {
+				setNoResultsFound(true);
+			}
+		} else {
+			if (noResultsFound == true) {
+				setNoResultsFound(false);
+			}
+		} */
 	}
 	if (filterBySearch && countriesData) {
 		filteredData = filteredData.filter((country) =>
@@ -42,11 +53,15 @@ export default function Home() {
 						setFilterByRegion={setFilterByRegion}
 					/>
 				</form>
-				<Countries
-					countriesData={countriesData}
-					filteredData={filteredData}
-					setCountriesData={setCountriesData}
-				/>
+				{countriesData && !noResultsFound ? (
+					<Countries
+						countriesData={countriesData}
+						filteredData={filteredData}
+						setCountriesData={setCountriesData}
+					/>
+				) : (
+					"no results found"
+				)}
 			</section>
 		</main>
 	);

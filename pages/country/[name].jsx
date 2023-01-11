@@ -5,7 +5,7 @@ import {
 } from "../../lib/countries";
 import Link from "next/link";
 import Image from "next/image";
-import BorderLink from "../../components/borderLink";
+import BorderCountries from "../../components/borderCountries/borderCountries";
 
 export async function getStaticProps({ params }) {
 	const countryData = await getCountryData(params.name);
@@ -25,39 +25,6 @@ export async function getStaticProps({ params }) {
 		},
 	};
 }
-/**
- * 	useEffect(() => {
-		let ignore = false;
-
-		async function fetchBorderData(border) {
-			try {
-				const res = await fetch(
-					`https://restcountries.com/v3.1/alpha/${border}`
-				);
-				const data = await res.json();
-				return data;
-			} catch (err) {
-				console.log(err);
-			}
-		}
-
-		async function setBorderName(border) {
-			const data = await fetchBorderData(border);
-			const name = data.name.common.toLowerCase();
-
-			if (!borderNames.includes(name)) borderNames.push(name);
-		}
-		if (borders && !ignore) {
-			borders.map((border) => {
-				async () => await setBorderName(border);
-			});
-		}
-		setBorderCountries([...borderNames]);
-		return () => {
-			ignore = true;
-		};
-	}, [borders]);
- */
 
 // Slow in development, change if it's still slow after deployment
 export async function getStaticPaths() {
@@ -101,7 +68,7 @@ export default function Country({ countryData, borderNames }) {
 					Back
 				</Link>
 				{console.log("work pls", borderNames)}
-				<section className="mt-20 flex items-center gap-32">
+				<section className="mt-20 flex items-center gap-20 justify-between">
 					<img
 						src={countryData.flags.png}
 						alt={`${countryData.name.common}'s Flag`}
@@ -174,19 +141,7 @@ export default function Country({ countryData, borderNames }) {
 								</p>
 							</div>
 						</div>
-						<div
-							className="flex gap-2 flex-wrap font-semibold leading-9 mt-16 
-						w-[800px]"
-						>
-							<p className=" font-extrabold">Border Countries:</p>{" "}
-							{borderNames &&
-								borderNames.map((borderName) => (
-									<BorderLink
-										key={borderName}
-										border={borderName}
-									/>
-								))}
-						</div>
+						<BorderCountries borderNames={borderNames} />
 					</article>
 				</section>
 			</section>

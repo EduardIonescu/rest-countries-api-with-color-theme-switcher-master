@@ -4,7 +4,8 @@ export default function CountryCard({ country }) {
 		<Link
 			href={`/country/${country.name.common.toLowerCase()}`}
 			className="h-[345px] max-w-64 rounded-md overflow-hidden bg-white 
-			dark:bg-darkBlue transition-all duration-300 shadow"
+			dark:bg-darkBlue transition-all duration-300 shadow hover:-translate-y-2
+			hover:-rotate-2 hover:shadow-lg dark:hover:shadow-xl"
 		>
 			<img
 				src={country.flags.png}
