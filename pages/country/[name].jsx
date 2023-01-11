@@ -79,7 +79,7 @@ export default function Country({ countryData, borderNames }) {
 	return (
 		<main
 			className="w-full py-10 px-20 bg-white dark:bg-veryDarkBlue
-		transition-all duration-300"
+		transition-all duration-300 min-h-[calc(100vh-96px)]"
 		>
 			<section className="mt-10">
 				<Link
@@ -91,13 +91,13 @@ export default function Country({ countryData, borderNames }) {
 				>
 					<Image
 						className="rotate-180 transition-all duration-300 ease-out
-					group-hover:-translate-x-2"
+					group-hover:-translate-x-2 dark:invert"
 						src="/icons/arrow-icon.svg"
 						alt=""
 						aria-hidden="true"
 						width={18}
 						height={10}
-					/>{" "}
+					/>
 					Back
 				</Link>
 				{console.log("work pls", borderNames)}

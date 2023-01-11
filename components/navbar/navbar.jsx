@@ -32,7 +32,7 @@ export default function Navbar() {
 							aria-hidden="true"
 							height={16}
 							width={12}
-							className={"w-4 h-4"}
+							className={"w-4 h-4 dark:invert"}
 						/>{" "}
 						Dark Mode
 					</button>

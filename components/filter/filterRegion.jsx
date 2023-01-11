@@ -50,7 +50,9 @@ export default function FilterRegion({ filterByRegion, setFilterByRegion }) {
 						: "America"
 					: "Filter by Region"}
 				<Image
-					className={selectIsOpen ? "" : "rotate-180"}
+					className={`dark:invert ${
+						selectIsOpen ? "" : "rotate-180"
+					}`}
 					src={"/icons/angle-down-icon.svg"}
 					alt=""
 					aria-hidden="true"
