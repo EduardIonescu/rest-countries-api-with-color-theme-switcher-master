@@ -33,5 +33,6 @@ const FilterButton = forwardRef(
 		);
 	}
 );
-
+// solves esLint error
+FilterButton.displayName = "FilterButton";
 export default FilterButton;

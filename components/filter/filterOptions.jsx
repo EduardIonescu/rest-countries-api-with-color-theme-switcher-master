@@ -43,5 +43,6 @@ const FilterOptions = forwardRef(({ toggleSelect, setFilterByRegion }, ref) => {
 		</ul>
 	);
 });
-
+// solves esLint error
+FilterOptions.displayName = "FilterOptions";
 export default FilterOptions;
