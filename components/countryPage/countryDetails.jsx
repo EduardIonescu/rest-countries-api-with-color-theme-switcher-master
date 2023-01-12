@@ -4,9 +4,10 @@ export default function CountryDetails({ countryData, borderNames }) {
 	const primaryLanguage = countryData.languages
 		? Object.keys(countryData.languages)[0]
 		: null;
-	const nativeName = countryData.name.nativeName[primaryLanguage]
-		? countryData.name.nativeName[primaryLanguage].common
-		: "None";
+	const nativeName =
+		primaryLanguage && countryData.name.nativeName[primaryLanguage]
+			? countryData.name.nativeName[primaryLanguage].common
+			: "None";
 	const currencies = countryData.currencies
 		? Object.values(countryData.currencies).map((currency) => currency.name)
 		: ["None"];
