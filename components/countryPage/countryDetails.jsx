@@ -1,8 +1,12 @@
 import BorderCountries from "./borderCountries/borderCountries";
 
 export default function CountryDetails({ countryData, borderNames }) {
-	const primaryLanguage = Object.keys(countryData.languages)[0];
-	const nativeName = countryData.name.nativeName[primaryLanguage].common;
+	const primaryLanguage = countryData.languages
+		? Object.keys(countryData.languages)[0]
+		: null;
+	const nativeName = countryData.name.nativeName[primaryLanguage]
+		? countryData.name.nativeName[primaryLanguage].common
+		: "None";
 	const currencies = countryData.currencies
 		? Object.values(countryData.currencies).map((currency) => currency.name)
 		: ["None"];
@@ -46,7 +50,8 @@ md:text-left"
 				<div>
 					<p className="font-semibold leading-9">
 						<span className="font-extrabold">Top Level Domain</span>
-						: {countryData.tld.join(", ")}
+						:{" "}
+						{countryData.tld ? countryData.tld.join(", ") : "None"}
 					</p>
 					<p className="font-semibold leading-9">
 						<span className="font-extrabold">Currencies</span>:{" "}
@@ -54,7 +59,9 @@ md:text-left"
 					</p>
 					<p className="font-semibold leading-9">
 						<span className="font-extrabold">Languages</span>:{" "}
-						{Object.values(countryData.languages).join(", ")}
+						{countryData.languages
+							? Object.values(countryData.languages).join(", ")
+							: "None"}
 					</p>
 				</div>
 			</div>
