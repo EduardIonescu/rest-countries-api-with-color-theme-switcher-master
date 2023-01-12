@@ -13,7 +13,11 @@ export default function Home() {
 	const [filterByRegion, setFilterByRegion] = useState(false);
 	const [filterBySearch, setFilterBySearch] = useState("");
 
-	let filteredData = cloneDeep(countriesData);
+	let filteredData = cloneDeep(countriesData).sort((a, b) => {
+		return a.name.common.toLowerCase() < b.name.common.toLowerCase()
+			? -1
+			: 1;
+	});
 	if (filterByRegion && countriesData) {
 		filteredData = filteredData.filter((country) => {
 			if (country.region == filterByRegion) {
@@ -62,7 +66,7 @@ export default function Home() {
 	return (
 		<main
 			className="w-full py-6 md:py-10 px-4 md:px-20 bg-veryLightGray transition duration-300
-		 dark:bg-veryDarkBlue min-h-[calc(100vh-96px)]"
+		 dark:bg-veryDarkBlue min-h-[calc(100vh-96px)] z-0"
 		>
 			<section>
 				<form className="flex flex-wrap gap-y-10 gap-x-4 justify-between w-full">

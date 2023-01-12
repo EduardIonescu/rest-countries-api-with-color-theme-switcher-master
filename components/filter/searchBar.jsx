@@ -1,8 +1,4 @@
-import { useTheme } from "next-themes";
-
 export default function SearchBar({ filterBySearch, setFilterBySearch }) {
-	const { theme } = useTheme();
-
 	return (
 		<input
 			value={filterBySearch}

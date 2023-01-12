@@ -6,8 +6,8 @@ export default function BorderLink({ border }) {
 				className="h-8 md:h-9 block min-w-[100px] bg-white dark:bg-darkBlue
 		dark:text-veryLightGray text-[12px] md:text-[14px] font-light
       rounded-md px-3 shadow text-center capitalize transition duration-300 
-			ease-out md:hover:-translate-y-1 md:hover:text-blueHover
-			md:dark:hover:text-[rgb(120,120,250)]"
+			ease-out xl:hover:-translate-y-1 xl:hover:text-blueHover
+			xl:dark:hover:text-[rgb(120,120,250)]"
 				href={`/country/${border}`}
 			>
 				{border}

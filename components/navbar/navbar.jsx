@@ -10,11 +10,11 @@ export default function Navbar() {
 		setMounted(true);
 	}, []);
 	return (
-		<header className="w-full shadow">
+		<header className="w-full relative shadow">
 			<nav
 				className="text-veryDarkBlueLightMode dark:text-white flex 
 			justify-between px-4 md:px-20 py-7 md:py-8 bg-white
-		dark:bg-darkBlue transition-all duration-300 text-sm"
+		dark:bg-darkBlue transition-all duration-300 text-sm "
 			>
 				<h1 className="font-extrabold text-base md:text-2xl">
 					Where in the world?
