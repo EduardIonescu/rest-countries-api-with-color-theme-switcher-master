@@ -45,13 +45,8 @@ export default function Home() {
 	useEffect(() => {
 		let ignore = false;
 
-		// Delete localStorage before deployment
-		let data = JSON.parse(localStorage.getItem("data"));
 		async function startFetching() {
-			if (!data) {
-				data = await fetchData(countriesURL);
-				localStorage.setItem("data", JSON.stringify(data));
-			}
+			const data = await fetchData(countriesURL);
 			if (!ignore) {
 				setCountriesData(data);
 			}
